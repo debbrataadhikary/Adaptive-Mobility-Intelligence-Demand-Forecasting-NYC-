@@ -1,61 +1,71 @@
-# Adaptive Mobility Intelligence & Demand Forecasting (NYC)
+# NYC Ride Intelligence: Adaptive Demand Forecasting & Analytics Engine
 
-### **Executive Summary**
-This project engineers a high-performance **Adaptive Intelligence System** to analyze and forecast demand across **19M+ NYC ride records** (Uber, Lyft, and other providers). By integrating long-term baselines with short-term moving trends, the system identifies "Abnormal Momentum" and "Critical Systemic Peaks," translating raw big data into executive-grade operational insights.
+A high-performance end-to-end analytics solution transforming **19 Million+ raw trip records** into operational intelligence using a custom SQL-to-Power BI pipeline.
 
----
+## 📊 Dashboard Overview
+![NYC Mobility Intelligence Dashboard](Images/NYC_Mobility_Intelligence.png)
 
-## 🚀 Key Technical Features
-
-### **1. Hybrid Intelligence Engine**
-Developed a dual-layered statistical engine that separates:
-* **Global Baselines:** Long-term seasonal norms for stable forecasting.
-* **Adaptive Trends:** 30-day moving windows to detect rapid shifts in urban mobility patterns.
-
-### **2. Model Trust Index (MTI)**
-Implemented a **Governance Layer** that flags analytical outputs as either *'Learning Phase'* or *'High Reliability'* based on historical data depth, ensuring high confidence in automated decision-making.
-
-### **3. Advanced Statistical Inference**
-* **Adaptive Z-Score:** Dynamic anomaly detection that adjusts based on global standard deviation.
-* **Trend Divergence %:** Identifies "Abnormal Momentum" (±25% shifts) by comparing real-time volume against recent moving averages.
-* **Dynamic Surge Score:** A normalized 0–100 scale designed for operational teams to prioritize resource allocation instantly.
-
-### **4. Big Data Optimization**
-* Architected using **PostgreSQL Materialized Views** for performance tuning.
-* Advanced use of **Window Functions** (`PARTITION BY`, `ROWS BETWEEN`) for multi-provider schema unification without data leakage.
+## 🎯 Project Objective
+This project moves beyond static reporting. It implements a custom **Predictive Analytics Engine** that categorizes market demand into "Intelligence Labels." By comparing real-time volume against historical baselines and recent trends, the system identifies systemic peaks and abnormal market momentum to drive proactive decision-making.
 
 ---
 
-## 🛠 Tech Stack
-* **Language:** SQL (PostgreSQL)
-* **Specialties:** Feature Engineering, Time-Series Analysis, ETL Pipelines, Statistical Modeling.
-* **BI Ready:** Engineered with spatial keys and KPI layers for seamless **Power BI** integration.
+## 💼 Business Logic & Operational Impact
+The engine is designed to translate complex data engineering into actionable business strategy:
+
+- **Dynamic Supply Allocation:** The 'Critical Systemic Peak' label alerts operations to incentivize driver deployment in specific zones before the system reaches a breaking point.
+- **Surge Pricing Foundation:** The 'Dynamic Surge Score (0-100)' provides a data-driven basis for automated surge pricing, identifying when demand outpaces the 30-day moving trend.
+- **Competitive Intelligence:** By tracking 'Market Share %' dynamically across 19M records, the business can identify specific 'Context Types' (e.g., Weekends vs. Holidays) where they are losing ground to competitors.
+
+![Market Dominance 2015](Images/SQL_Model_Logic_Validation.png)
 
 ---
 
-## 📂 Project Architecture (SQL Flow)
-1.  **Phase 1: Unified Schema** – Integrating diverse data sources (Uber, Lyft, Dial7).
-2.  **Phase 2: Feature Engineering** – Extracting temporal and contextual features (Holidays vs. Workdays).
-3.  **Phase 3 & 4: Stats Engine** – Generating global and 30-day windowed averages.
-4.  **Phase 5: Inference Layer** – Calculating Z-Scores and Divergence percentages.
-5.  **Phase 6 & 7: Governance & Output** – Final decision labels and Market Share analysis.
+## 🛡️ Data Reliability & Sparsity Handling (Governance)
+Handling 19 million records across multiple years and providers introduced significant data sparsity. We implemented a robust **Data Governance Layer** within the SQL engine:
+
+- **Model Trust Index:** If historical data for a specific hour/context is < 30 days (`history_depth < 30`), it's labeled as **'Learning Phase'**. It transitions to **'High Reliability'** only with sufficient data.
+- **Fallback Logic (COALESCE):** If the 30-day moving average is missing, the engine falls back to the **Global Average** (`COALESCE(moving_avg_30d, global_avg)`).
+- **History Depth Tracking:** Ensures transparency in the statistical significance of every alert.
+
+![Critical Systemic Peak Analysis](Images/NYC_Mobility_Critical_Systemic_Peak.png)
 
 ---
 
-## 📊 Sample Output KPIs
-* **Demand Intelligence Labels:** Categorizes every hour as *Baseline Normal*, *Abnormal Momentum*, *High Demand*, or *Critical Peak*.
-* **Market Share %:** Real-time tracking of provider dominance across NYC.
-* **Dynamic Surge Score:** Real-time intensity metric for fleet management.
+## 🧠 The Intelligence Engine: Defining "Demand"
+We engineered a multi-layered statistical approach to move beyond raw volume tracking:
+
+### 1. Adaptive Z-Score (The Deviation Metric)
+Calculates how much the current hour's volume deviates from the historical global average ($Z \ge 2.0$ indicates significant high demand).
+
+### 2. Trend Divergence % (The Real-time Pulse)
+Compares current volume against a **30-day moving average**. A divergence **>25%** triggers an **'Abnormal Momentum'** alert.
 
 ---
 
-## 📖 How to Use
-1.  **Clone the repository.**
-2.  Run the provided **`.sql`** script in a PostgreSQL environment.
-3.  Access the `view_nyc_ride_intelligence` materialized view for downstream BI reporting.
+## 🏗️ Technical Architecture
+
+### Phase 1: Unified Schema & Data Fusion
+Harmonized **19 million rows** from disparate providers (Uber, Lyft, Dial 7, Carmel) using SQL `UNION ALL` and sophisticated normalization.
+
+### Phase 2: Feature Engineering & Window Functions
+- **Contextual Mapping:** Categorizing trips into 'Holiday_Season', 'Weekend', or 'Regular_Workday'.
+- **Dual-Stats Engine:** Leveraged PostgreSQL window functions to process Global Baselines and Short-term Trends simultaneously.
+
+### Phase 3: Spatial Grid Optimization (The "Spatial Key")
+To handle visualization latency, we engineered a **Spatial Grid System** ($Lat \times 100$) to create "Binned" keys for high-density analysis without performance loss.
 
 ---
 
+## 🛠️ Setup & Implementation
+1. **Database:** PostgreSQL.
+2. **Processing:** Execute the SQL script to generate the **Materialized View**.
+3. **Visualization:** Connect the Power BI template to the processed SQL view.
+
+---
+
+### 📝 Skills Demonstrated:
+`Data Engineering` `Business Intelligence` `Data Governance` `Big Data Processing` `Advanced SQL (CTEs, Window Functions)` `Statistical Modeling` `Power BI Dashboards` `DAX`
 ## 🤝 Connect with Me
 **Debbrata Kumar Adhikary** 🔗 **LinkedIn:** [linkedin.com/in/debbrata-adhikary](https://www.linkedin.com/in/debbrata-adhikary/)  
 🌐 **Website:** [www.debadhikary.com](http://www.debadhikary.com)  
